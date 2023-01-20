@@ -88,13 +88,6 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-// Declare variables
-var uppercase;
-var lowercase;
-var numbers;
-var specialCharacters;
-var numericCharacters;
-
 // Add event listener to bring up the first prompt
 var generateButton = document.querySelector("#generate");
 
@@ -106,9 +99,19 @@ generateButton.addEventListener("click", function () {
 function getPasswordOptions() {
   numericCharacters = prompt("Please choose a password length between 10 and 64 characters:")
 if (numericCharacters < 10) {
-  alert ("Please select a number higher than 10");
+  alert ("Sorry! Please select a number higher than 10");
   getPasswordOptions()
 }
+else if (numericCharacters > 64) {
+  alert ("Sorry! Please select a number lower than 64");
+  getPasswordOptions()
+}
+else {
+  characterChoices()}
+  function characterChoices() {
+    upperCasedCharacters = alert ("Would you like your password to contain uppercase characters?");
+    lowerCasedCharacters = alert ("Would you like your password to contain lowercase characters?");
+    numericCharacters = alert }
 }
 
 // Function for getting a random element from an array
