@@ -109,9 +109,9 @@ else if (numericCharacters > 64) {
 else {
   characterChoices()}
   function characterChoices() {
-    upperCasedCharacters = alert ("Would you like your password to contain uppercase characters?");
-    lowerCasedCharacters = alert ("Would you like your password to contain lowercase characters?");
-    numericCharacters = alert }
+    upperCasedCharacters = confirm ("Would you like your password to contain uppercase characters?");
+    lowerCasedCharacters = confirm ("Would you like your password to contain lowercase characters?");
+    numericCharacters = confirm }
 }
 
 // Function for getting a random element from an array
