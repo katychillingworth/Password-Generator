@@ -118,24 +118,30 @@ function getPasswordOptions() {
     var allowLowerCasedCharacters = confirm("Would you like your password to contain lowercase characters?");
     var allowNumericCharacters = confirm("Would you like your password to contain numerical characters?");
     var allowSpecialCharacters = confirm("Would you like your password to contain special characters?");
-
-    // TODO: Generate password using choices
   }
-}
+  if (!allowLowerCasedCharacters && !allowNumericCharacters && !allowUpperCasedCharacters && !allowSpecialCharacters) {
+    alert("Please choose at least one of these options!")
+    getPasswordOptions()
+  }
+ 
+  }
+  // Function to generate password with user input
+  // TODO: Add parameters for all 5 options
+  function generatePassword() {
+    // TODO: Define password generation algorithm
+    // Important factors are:
+    // - Password length
+    // - Randomised character from _all_ potential options
 
-// Function to generate password with user input
-// TODO: Add parameters for all 5 options
-function generatePassword() {
-  // TODO: Define password generation algorithm
-  // Important factors are:
-  // - Password length
-  // - Randomised character from _all_ potential options
+    var password = "";
+    for (var i = 0; i < choices; i++) {
+      var pickPassword = choices[Math.floor(Math.random() * choices.length)];
+      password.push(pickPassword);
+      console.log(pickPassword)
+    }
 
-  // var password = "";
-  // for (var i = 0; i < numericCharacters; i++) {
-  //   password = password + getRandom(characterChoices);
-  //   return password
-  // }
+    return password;
+  }
 }
 
 // Get references to the #generate element
