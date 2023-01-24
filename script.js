@@ -88,20 +88,6 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-// Function for getting a random element from an array
-function getRandom(arr) {
-  var randomIndex = Math.floor(Math.random() * arr.length);
-  var item = arr[randomIndex];
-  return item;
-}
-
-// Add event listener to bring up the first prompt:
-var generateButton = document.querySelector("#generate");
-
-generateButton.addEventListener("click", function () {
-  getPasswordOptions()
-})
-
 // Function to prompt user for password options:
 function getPasswordOptions() {
   var passwordLength = prompt("Please choose a password length between 10 and 64 characters:")
@@ -126,30 +112,35 @@ function getPasswordOptions() {
  
   }
   // Function to generate password with user input
-  // TODO: Add parameters for all 5 options
   function generatePassword() {
-    // TODO: Define password generation algorithm
-    // Important factors are:
-    // - Password length
-    // - Randomised character from _all_ potential options
-
+    var allOptions = [lowerCasedCharacters, upperCasedCharacters, numericCharacters, specialCharacters];
     var password = "";
-    for (var i = 0; i < choices; i++) {
-      var pickPassword = choices[Math.floor(Math.random() * choices.length)];
-      password.push(pickPassword);
-      console.log(pickPassword)
+
+    for (var i = 0; i < 1; i++) {
+      var characterSet = getRandom(allOptions);
+      var character = getRandom(characterSet);
+      
+      password += character;
+      console.log(character);
     }
 
     return password;
   }
-}
 
 // Get references to the #generate element
-generatePassword()
 var generateBtn = document.querySelector('#generate');
+
+// Function for getting a random element from an array
+function getRandom(arr) {
+  // This should get a random number between 0 and arr.length
+
+  // Then return arr[random];
+  return arr[0];
+}
 
 // Write password to the #password input
 function writePassword() {
+  getPasswordOptions();
   var password = generatePassword();
   var passwordText = document.querySelector('#password');
   passwordText.value = password;
