@@ -88,9 +88,16 @@ var upperCasedCharacters = [
   'Z'
 ];
 
+var passwordLength = 0;
+var allowNumericCharacters = false;
+var allowSpecialCharacters = false;
+var allowUpperCasedCharacters = false;
+var allowLowerCasedCharacters = false;
+
 // Function to prompt user for password options:
 function getPasswordOptions() {
-  var passwordLength = prompt("Please choose a password length between 10 and 64 characters:")
+  passwordLength = prompt("Please choose a password length between 10 and 64 characters:");
+
   if (passwordLength < 10) {
     alert("Sorry! Please select a number higher than 10");
     getPasswordOptions()
@@ -100,48 +107,62 @@ function getPasswordOptions() {
     getPasswordOptions()
   }
   else {
-    var allowUpperCasedCharacters = confirm("Would you like your password to contain uppercase characters?");
-    var allowLowerCasedCharacters = confirm("Would you like your password to contain lowercase characters?");
-    var allowNumericCharacters = confirm("Would you like your password to contain numerical characters?");
-    var allowSpecialCharacters = confirm("Would you like your password to contain special characters?");
+    allowUpperCasedCharacters = confirm("Would you like your password to contain uppercase characters?");
+    allowLowerCasedCharacters = confirm("Would you like your password to contain lowercase characters?");
+    allowNumericCharacters = confirm("Would you like your password to contain numerical characters?");
+    allowSpecialCharacters = confirm("Would you like your password to contain special characters?");
   }
+
   if (!allowLowerCasedCharacters && !allowNumericCharacters && !allowUpperCasedCharacters && !allowSpecialCharacters) {
     alert("Please choose at least one of these options!")
     getPasswordOptions()
   }
- 
-  }
-  // Function to generate password with user input
-  function generatePassword() {
-    var allOptions = [lowerCasedCharacters, upperCasedCharacters, numericCharacters, specialCharacters];
-    var password = "";
+}
 
-    for (var i = 0; i < 1; i++) {
-      var characterSet = getRandom(allOptions);
-      var character = getRandom(characterSet);
-      
-      password += character;
-      console.log(character);
-    }
+// Function to generate password with user input
+function generatePassword(length, allowNumbers, allowSpecial, allowUpper, allowLower) {
+  var allOptions = [];
 
-    return password;
+  if (allowNumbers) {
+    allOptions.push(numericCharacters);
   }
+
+  if (allowSpecial) {
+    allOptions.push(specialCharacters);
+  }
+
+  if (allowUpper) {
+    allOptions.push(upperCasedCharacters);
+  }
+
+  if (allowLower) {
+    allOptions.push(lowerCasedCharacters);
+  }
+
+  var password = "";
+
+  for (var i = 0; i < length; i++) {
+    var characterSet = getRandom(allOptions);
+    var character = getRandom(characterSet);
+
+    password += character;
+    console.log(character);
+  }
+
+  return password;
+}
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
-
-// Function for getting a random element from an array
 function getRandom(arr) {
-  // This should get a random number between 0 and arr.length
-
-  // Then return arr[random];
-  return arr[0];
+  var i = Math.floor(Math.random() * arr.length);
+  return arr[i];
 }
 
 // Write password to the #password input
 function writePassword() {
   getPasswordOptions();
-  var password = generatePassword();
+  var password = generatePassword(passwordLength, allowNumericCharacters, allowSpecialCharacters, allowUpperCasedCharacters, allowLowerCasedCharacters);
   var passwordText = document.querySelector('#password');
   passwordText.value = password;
 }
